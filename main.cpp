@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <ctime>
 
 using namespace std;
 double const TWOPI = 6.2831853071795864;
@@ -14,12 +15,17 @@ int main()
     int date_YY, date_MM, date_DD, birth_YY, birth_MM, birth_DD, SPAN_1;
     double SPAN;
 
-    cout << "Please input today's date in the format of YY MM DD" << endl;
-    cin >> date_YY >> date_MM >> date_DD;
+	time_t currentTime;
+  	struct tm *localTime;
 
- //   cout << "Please input your BIRTHDAY in the format of YY MM DD" << endl;
- //   cin >> birth_YY >> birth_MM >> birth_DD;
-    birth_YY = 1988; birth_MM = 5; birth_DD = 23;
+  	time( &currentTime );                   // Get the current time
+  	localTime = localtime( &currentTime );  // Convert the current time to the local time
+
+  	date_DD  = localTime->tm_mday;
+  	date_MM  = localTime->tm_mon + 1;
+  	date_YY  = localTime->tm_year + 1900;
+
+    birth_YY = 1988; birth_MM = 8; birth_DD = 11;
 
     double JD_NOW, JD_BIRTH;
     JD_NOW = GRE2JULE(date_YY, date_MM, date_DD);
@@ -38,7 +44,7 @@ int main()
     next_climax[2] = 28 - (SPAN_1 + 28 * 3 / 4) % 28 + int(JD_NOW) + 1;
     next_climax[3] = 33 - (SPAN_1 + 33 * 3 / 4) % 33 + int(JD_NOW) + 1;
 
-    cout << "****************************************************************************" << endl;
+
     cout << "Have fun! Thanks for your test" << endl;
     cout << "Your Psycological Index:" << endl;
     cout << star_index[1] << endl;
@@ -51,7 +57,7 @@ int main()
     JULE2GRE(next_climax[2], 2);
     JULE2GRE(next_climax[3], 3);
     cout << "----------------------------------------------------------------------------" << endl;
-    cout << "****************************************************************************" << endl;
+
 }
 
 double GRE2JULE(int date_YY, int date_MM, int date_DD)
