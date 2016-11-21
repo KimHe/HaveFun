@@ -59,12 +59,12 @@ int main(int argc, char *argv[])
     double const TWOPI = 6.2831853071795864;
 
     // get the date struct, tm
-	time_t t = time(NULL);
-  	struct tm tm = *localtime(&t);
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
 
-  	today.day    = tm.tm_mday;
-  	today.month  = tm.tm_mon + 1;
-  	today.year   = tm.tm_year + 1900;
+    today.day    = tm.tm_mday;
+    today.month  = tm.tm_mon + 1;
+    today.year   = tm.tm_year + 1900;
     // put your birthday information here
     birth.day    = 11; 
     birth.month  = 8;
@@ -124,13 +124,13 @@ int main(int argc, char *argv[])
 
     output = gtk_button_new_with_label(str);
 
-  	gtk_box_pack_start(GTK_BOX(vbox), output, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(vbox), output, TRUE, TRUE, 0);
 
-  	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), G_OBJECT(window));
+    g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), G_OBJECT(window));
 
-  	gtk_widget_show_all(window);
+    gtk_widget_show_all(window);
 
-  	gtk_main();
+    gtk_main();
 
     return 0;
 
