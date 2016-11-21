@@ -100,18 +100,9 @@ int main(int argc, char *argv[])
     int_date = JULE2GRE(next_index[2]);
 
     // print the results    
-  	char str_output[1000], str_date[1000], str_dayNum[1000], str_Psy[1000];
-  	char str_Emo[1000], str_Int[1000], str_NextPsy[1000], str_NextEmo[1000], str_NextInt[1000];
+  	char str[1000];
 
-    sprintf(str_output, "                Output \n");
-    sprintf(str_date, "              %d-%d-%d \n", today.year, today.month, today.day);
-    sprintf(str_dayNum, "    Today is the %dth day of year %d \n", numDay, today.year);
-    sprintf(str_Psy, " Psycological climax index: %.2f   \n", star_index[0]);
-    sprintf(str_Emo, " Emotional    climax index: %.2f   \n", star_index[1]);
-    sprintf(str_Int, " Intellectual climax index: %.2f   \n", star_index[2]);
-    sprintf(str_NextPsy, " Next psycological climax: %d-%d-%d \n", psy_date.year, psy_date.month, psy_date.day);
-    sprintf(str_NextEmo, " Next psycological climax: %d-%d-%d \n", emo_date.year, emo_date.month, emo_date.day);
-    sprintf(str_NextInt, " Next psycological climax: %d-%d-%d \n", int_date.year, int_date.month, int_date.day);
+    sprintf(str, "                  %d-%d-%d \n\n    Today is the %dth day of year %d \n \n    Psycological climax index: %.2f \n    Emotional    climax index:  %.2f \n    Intellectual climax index:   %.2f \n \n    Next psycological climax: %d-%d-%d \n    Next emotionaly climax:   %d-%d-%d \n    Next intellectual climax:   %d-%d-%d \n", today.year, today.month, today.day, numDay, today.year, star_index[0], star_index[1], star_index[2], psy_date.year, psy_date.month, psy_date.day, emo_date.year, emo_date.month, emo_date.day, int_date.year, int_date.month, int_date.day);
     
 
     // GUI part by gtk-3.0
@@ -119,45 +110,21 @@ int main(int argc, char *argv[])
     GtkWidget *vbox;
 
     GtkWidget *output;
-    GtkWidget *date;
-    GtkWidget *dayNum;
-    GtkWidget *Psy;
-    GtkWidget *Emo;
-    GtkWidget *Int;
-    GtkWidget *NextPsy;
-    GtkWidget *NextEmo;
-    GtkWidget *NextInt;
 
     gtk_init(&argc, &argv);
 
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-    gtk_window_set_default_size(GTK_WINDOW(window), 600, 300);
-    gtk_window_set_title(GTK_WINDOW(window), "Have Fun!");
+    gtk_window_set_default_size(GTK_WINDOW(window), 400, 300);
+    gtk_window_set_title(GTK_WINDOW(window), "Output of HaveFun");
     gtk_container_set_border_width(GTK_CONTAINER(window), 5);
 
     vbox = gtk_box_new(TRUE, 1);
     gtk_container_add(GTK_CONTAINER(window), vbox);
 
-    output = gtk_button_new_with_label(str_output);
-    date = gtk_button_new_with_label(str_date);
-    dayNum = gtk_button_new_with_label(str_dayNum);
-    Psy = gtk_button_new_with_label(str_Psy);
-    Emo = gtk_button_new_with_label(str_Emo);
-    Int = gtk_button_new_with_label(str_Int);
-    NextPsy = gtk_button_new_with_label(str_NextPsy);
-    NextEmo = gtk_button_new_with_label(str_NextEmo);
-    NextInt = gtk_button_new_with_label(str_NextInt);
+    output = gtk_button_new_with_label(str);
 
   	gtk_box_pack_start(GTK_BOX(vbox), output, TRUE, TRUE, 0);
-  	gtk_box_pack_start(GTK_BOX(vbox), date, TRUE, TRUE, 0);
-  	gtk_box_pack_start(GTK_BOX(vbox), dayNum, TRUE, TRUE, 0);
-  	gtk_box_pack_start(GTK_BOX(vbox), Psy, TRUE, TRUE, 0);
-  	gtk_box_pack_start(GTK_BOX(vbox), Emo, TRUE, TRUE, 0);
-  	gtk_box_pack_start(GTK_BOX(vbox), Int, TRUE, TRUE, 0);
-  	gtk_box_pack_start(GTK_BOX(vbox), NextPsy, TRUE, TRUE, 0);
-  	gtk_box_pack_start(GTK_BOX(vbox), NextEmo, TRUE, TRUE, 0);
-  	gtk_box_pack_start(GTK_BOX(vbox), NextInt, TRUE, TRUE, 0);
 
   	g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), G_OBJECT(window));
 
