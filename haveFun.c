@@ -100,34 +100,104 @@ int main(int argc, char *argv[])
     int_date = JULE2GRE(next_index[2]);
 
     // print the results    
-  	char str[1000];
+  	char str_date[1000], str_dayNum[1000], str_psy[1000], str_emo[1000];
+  	char str_int[1000], str_Npsy[1000], str_Nint[1000], str_Nemo[1000];
 
-    sprintf(str, "                  %d-%d-%d \n\n    Today is the %dth day of year %d \n \n    Psycological climax index: %.2f \n    Emotional    climax index:  %.2f \n    Intellectual climax index:   %.2f \n \n    Next psycological climax: %d-%d-%d \n    Next emotionaly climax:   %d-%d-%d \n    Next intellectual climax:   %d-%d-%d \n", today.year, today.month, today.day, numDay, today.year, star_index[0], star_index[1], star_index[2], psy_date.year, psy_date.month, psy_date.day, emo_date.year, emo_date.month, emo_date.day, int_date.year, int_date.month, int_date.day);
-    
+    sprintf(str_date, "%d-%d-%d \n", today.year, today.month, today.day);
+    sprintf(str_dayNum, "Today is the %dth day of year %d \n", numDay, today.year);
+    sprintf(str_psy, "%.2f", star_index[0]);
+    sprintf(str_emo, "%.2f", star_index[1]);
+    sprintf(str_int, "%.2f", star_index[2]);
+    sprintf(str_Npsy, "%d-%d-%d", psy_date.year, psy_date.month, psy_date.day);
+    sprintf(str_Nemo, "%d-%d-%d", emo_date.year, emo_date.month, emo_date.day);
+    sprintf(str_Nint, "%d-%d-%d", int_date.year, int_date.month, int_date.day);
+
 
     // GUI part by gtk-3.0
     GtkWidget *window;
-    GtkWidget *vbox;
+    GtkWidget *button;
+    GtkWidget *grid;
+    GtkWidget *child00;
+    GtkWidget *child01;
+    GtkWidget *child1;
+    GtkWidget *child2;
+    GtkWidget *child3;
+    GtkWidget *child4;
+    GtkWidget *child5;
+    GtkWidget *child6;
 
-    GtkWidget *output;
 
     gtk_init(&argc, &argv);
 
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-    gtk_window_set_default_size(GTK_WINDOW(window), 400, 300);
+    gtk_window_set_default_size(GTK_WINDOW(window), 500, 300);
     gtk_window_set_title(GTK_WINDOW(window), "Output of HaveFun");
     gtk_container_set_border_width(GTK_CONTAINER(window), 5);
 
-    vbox = gtk_box_new(TRUE, 1);
-    gtk_container_add(GTK_CONTAINER(window), vbox);
 
-    output = gtk_button_new_with_label(str);
+/* ------------------------------------------------------*/
+    grid = gtk_grid_new();
 
-    gtk_box_pack_start(GTK_BOX(vbox), output, TRUE, TRUE, 0);
+    gtk_container_add(GTK_CONTAINER(window), grid);
 
-    g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), G_OBJECT(window));
+    child00 = gtk_label_new(str_date);
+    gtk_grid_attach(GTK_GRID(grid), child00, 2, 0, 2, 2);
 
+
+    child01 = gtk_label_new(str_dayNum);
+    gtk_grid_attach(GTK_GRID(grid), child01, 2, 2, 2, 1);
+
+
+    child1 = gtk_label_new("  Psycological climax index: \n");
+    gtk_grid_attach(GTK_GRID(grid), child1, 0, 4, 4, 2);
+
+    button = gtk_button_new_with_label(str_psy);
+    gtk_grid_attach(GTK_GRID(grid), button, 4, 4, 1, 1);
+    gtk_widget_show(button);
+
+
+    child2 = gtk_label_new("Emotional climax index:   \n");
+    gtk_grid_attach(GTK_GRID(grid), child2, 0, 6, 4, 2);
+
+    button = gtk_button_new_with_label(str_emo);
+    gtk_grid_attach(GTK_GRID(grid), button, 4, 6, 1, 1);
+    gtk_widget_show(button);
+
+
+    child3 = gtk_label_new("Intellectual climax index:  \n");
+    gtk_grid_attach(GTK_GRID(grid), child3, 0, 8, 4, 2);
+
+    button = gtk_button_new_with_label(str_int);
+    gtk_grid_attach(GTK_GRID(grid), button, 4, 8, 1, 1);
+    gtk_widget_show(button);
+
+
+    child4 = gtk_label_new("Next psycological climax:  \n");
+    gtk_grid_attach(GTK_GRID(grid), child4, 0, 12, 4, 2);
+
+    button = gtk_button_new_with_label(str_Npsy);
+    gtk_grid_attach(GTK_GRID(grid), button, 4, 12, 1, 1);
+    gtk_widget_show(button);
+
+
+    child5 = gtk_label_new("Next emotional climax:   \n");
+    gtk_grid_attach(GTK_GRID(grid), child5, 0, 14, 4, 2);
+
+    button = gtk_button_new_with_label(str_Nemo);
+    gtk_grid_attach(GTK_GRID(grid), button, 4, 14, 1, 1);
+    gtk_widget_show(button);
+
+
+    child6 = gtk_label_new("Next intellectual climax:  \n");
+    gtk_grid_attach(GTK_GRID(grid), child6, 0, 16, 4, 2);
+
+    button = gtk_button_new_with_label(str_Nint);
+    gtk_grid_attach(GTK_GRID(grid), button, 4, 16, 1, 1);
+    gtk_widget_show(button);
+
+
+    gtk_widget_show(button);
     gtk_widget_show_all(window);
 
     gtk_main();
