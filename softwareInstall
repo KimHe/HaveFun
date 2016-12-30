@@ -1,0 +1,88 @@
+#!/bin/bash
+
+# a bash script for post-installation
+
+rm -rf ~/examples.desktop
+
+# add repositories
+sudo add-apt-repository -y "deb http://dl.google.com/linux/chrome/deb/ stable main"
+sudo add-apt-repository -y ppa:synapse-core/ppa
+
+# basic update
+sudo apt-get -y update
+sudo apt-get -y upgrade
+
+# install software
+sudo apt-get -y install \
+    wget vim gcc g++ gfortran fort77 f2c cmake make \
+    gnuplot octave git texlive-full mutt mplayer mc apvlv\
+    openssh-client openssh-servermc synaptic nfs-common \
+    liblapack3 liblapack-dev libblas3 libhdf5-dev synapse\
+    cowsay fortune cpufrequtils curl dropbox build-essential \
+    google-chrome-stable virtualbox virtualbox-guest-additions-iso
+
+# extra
+sudo apt-get install -y ubuntu-restricted-extras
+
+
+# youtube-dl
+wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+chmod a+rx /usr/local/bin/youtube-dl
+
+
+# sundials
+cd ~/Downloads
+wget http://computation.llnl.gov/projects/sundials/download/sundials-2.6.2.tar.gz  
+tar -xvf sundials-2.6.2.tar.gz
+mkdir sundialsbuild && cd sundialsbuild
+cmake -DCMAKE_INSTALL_PREFIX="/usr/local/sundials" -DEXAMPLES_ENABLE=OFF -DOPENMP_ENABLE=ON -DBUILD_SHARED_LIBS=OFF -DCMAKE_C_FLAGS=-fPIC ../sundials-2.6.2
+
+make
+make install
+
+cd .. && rm -rf sundialsbuild
+
+
+# nmap-7.0.0
+wget https://nmap.org/dist/nmap-7.00.tar.bz2
+bzip2 -cd nmap-7.00.tar.bz2 | tar xvf -
+cd nmap-7.00
+./configure
+make
+
+sudo su
+make install
+exit
+
+cd .. && rm -rf nmap-7.00
+
+
+# CADET
+git clone https://github.com/modsim/CADET.git
+mkdir buildCadet && cd buildCadet
+export SUNDIALS_ROOT=/usr/local/sundials
+##export HDF5_ROOT=/usr/local/hdf5
+##export MATLAB_ROOT=/usr/local/MATLAB/R2014a
+cmake -DCMAKE_INSTALL_PREFIX="/usr/local/cadet" ../CADET*/
+make
+make install
+cd ..
+
+
+## ubuntu flat theme
+wget https://launchpad.net/~ravefinity-project/+archive/ubuntu/ppa/+files/vibrancy-colors_2.7~xenial~Noobslab.com_all.deb
+
+sudo dpkg -i vibrancy*
+
+wget https://launchpad.net/~ravefinity-project/+archive/ubuntu/ppa/+files/ambiance-flat-colors_14.04.2~trusty~NoobsLab.com_all.deb
+wget https://launchpad.net/~ravefinity-project/+archive/ubuntu/ppa/+files/radiance-flat-colors_14.04.2~trusty~NoobsLab.com_all.deb
+
+sudo dpkg -i ambiance*
+sudo dpkg -i radiance*
+
+
+# reboot
+echo "========================================"
+echo ":) Everything goes well. Time for reboot"
+echo "========================================"
+echo ""

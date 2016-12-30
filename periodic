@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# a bash script to periodically clean up the computer
+
+sudo apt-get update
+sudo apt-get upgrade -y
+
+sudo apt-get autoremove
+sudo apt-get remove
+sudo apt-get autoclean
+sudo apt-get clean
+
+export DISPLAY=:0 && /usr/bin/notify-send "Hello" "The computer is cleaning up itself"

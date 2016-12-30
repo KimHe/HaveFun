@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# a small bash script to check the battery remaining on the discharging mode
+
+tt=$(bat | grep percentage | sed -e 's/[^0-9.]//g')
+
+if [ $tt -le "8" ]; then
+    echo "Hi, the Nexus 7 needs some alcohol" | mutt -s "Battery condition" example@gmail.com
+fi

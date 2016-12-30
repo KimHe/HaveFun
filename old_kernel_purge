@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# a bash script to purge old kernels
+
+sudo purge-old-kernels --keep 2
+
+export DISPLAY=:0
+
+/usr/bin/notify-send "Hello" "The old kernels have been deleted"

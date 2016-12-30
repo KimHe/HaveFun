@@ -1,0 +1,71 @@
+#!/bin/bash
+
+# a small script to have the weather forecast
+
+#inxi -xxxW 50.9222,6.3583 -c 0 > /tmp/weather.txt
+inxi -xxxw -c 0 > /tmp/weather.txt
+
+if [ -f /tmp/weather.txt ]; then
+
+    for i in {1..25}
+    do
+
+        a=$(grep "Conditions:" /tmp/weather.txt | awk -v n=$i '{print $n}')
+
+        if [ "$a" = "Conditions:" ]; then
+            let "NumTmprt=$i+1"
+#           echo "$NumTmprt"
+        elif [ "$a" = "-" ]; then
+            let "NumDesrp=$i+1"
+#           echo "$NumDesrp"
+        elif [ "$a" = "Wind:" ]; then
+            let "NumWind=$i-1"
+#           echo "$NumWind"
+        elif [ "$a" = "Humidity:" ]; then
+            let "NumHumdy=$i+1"
+#           echo "$NumHumdy"
+        fi
+
+    done
+
+    temp=$(grep "Conditions:" /tmp/weather.txt | awk -v n=$NumTmprt '{print $n}')
+    let "temp_degree=($temp-32)*5/9"
+
+    echo -e "温度 \n \n \t \t \t$temp_degree 度 \n" > /tmp/log_weather
+
+#    for ((k=NumDesrp; k < NumWind-1; k++))
+#    do
+
+#        grep "Conditions:" /tmp/weather.txt | awk -v n=$k '{print $n}' >> /tmp/log_weather
+
+#    done
+
+    echo -e "天气 \n" >> /tmp/log_weather
+
+    let "temp_1=$NumDesrp+1"
+    let "temp_2=$NumDesrp+2"
+    let "temp_3=$NumDesrp+3"
+
+    if [ "$NumDesrp" -eq "$NumWind" ]; then
+        grep "Conditions:" /tmp/weather.txt | awk -v n=$NumDesrp '{print "\t" "\t" "\t" $n}' >> /tmp/log_weather
+    elif [ "$temp_1" -eq "$NumWind" ]; then
+        grep "Conditions:" /tmp/weather.txt | awk -v n=$NumDesrp '{print "\t" "\t" "\t" $n "\t" $(n+1)}' >> /tmp/log_weather
+    elif [ "$temp_2" -eq "$NumWind" ]; then
+        grep "Conditions:" /tmp/weather.txt | awk -v n=$NumDesrp '{print "\t" "\t" "\t" $n "\t" $(n+1) "\t" $(n+2)}' >> /tmp/log_weather
+    elif [ "$temp_3" -eq "$NumWind" ]; then
+        grep "Conditions:" /tmp/weather.txt | awk -v n=$NumDesrp '{print "\t" "\t" "\t" $n "\t" $(n+1) "\t" $(n+2) "\t" $(n+3)}' >> /tmp/log_weather
+    else
+        grep "Conditions:" /tmp/weather.txt | awk -v n=$NumDesrp -v m=$NumWind '{print "\t" "\t" "\t" $n "\t" $(n+1) "\t" $(n+2) "\t" $(n+3) "\t" $m}' >> /tmp/log_weather
+    fi
+
+    echo -e "\n" >> /tmp/log_weather
+    echo -e "湿度 \n" >> /tmp/log_weather
+
+    indx=$(grep "Conditions:" /tmp/weather.txt | awk -v n=$NumHumdy '{print "\t" "\t" "\t" $n}' | sed -e 's/[^\t\t\t0-9]*//g')
+    echo -e "$indx 度 \n" >> /tmp/log_weather
+
+fi
+
+
+espeak -v zh -f /tmp/log_weather
+
