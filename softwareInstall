@@ -16,9 +16,9 @@ sudo apt-get -y upgrade
 sudo apt-get -y install \
     wget vim gcc g++ gfortran fort77 f2c cmake make \
     gnuplot octave git texlive-full mutt mplayer mc apvlv\
-    openssh-client openssh-servermc synaptic nfs-common \
-    liblapack3 liblapack-dev libblas3 libhdf5-dev synapse\
-    cowsay fortune cpufrequtils curl dropbox build-essential \
+    openssh-client openssh-servermc synaptic nfs-common bikeshed \
+    liblapack3 liblapack-dev libblas3 libhdf5-dev synapse zsh \
+    cowsay fortune cpufrequtils curl dropbox build-essential python3-pip \
     google-chrome-stable virtualbox virtualbox-guest-additions-iso
 
 # extra
@@ -79,6 +79,20 @@ wget https://launchpad.net/~ravefinity-project/+archive/ubuntu/ppa/+files/radian
 
 sudo dpkg -i ambiance*
 sudo dpkg -i radiance*
+
+# oh-my-zsh
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+# Powerline
+sudo pip3 install git+git://github.com/Lokaltog/powerline
+
+wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbol.otf
+wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+
+mkdir -p ~/.fonts/ && mv PowerlineSymbols.otf ~/.fonts/
+fc-cache -vf ~/.fonts
+fc-cache -vf /usr/share/fonts
+mkdir -p ~/.config/fontconfig/conf.d/ && mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 
 
 # reboot
