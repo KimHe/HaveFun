@@ -47,13 +47,10 @@ cd .. && rm -rf sundialsbuild
 wget https://nmap.org/dist/nmap-7.00.tar.bz2
 bzip2 -cd nmap-7.00.tar.bz2 | tar xvf -
 cd nmap-7.00
+
 ./configure
 make
-
-sudo su
-make install
-exit
-exit
+sudo make install
 
 cd .. && rm -rf nmap-7.00
 
