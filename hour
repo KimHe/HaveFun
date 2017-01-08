@@ -7,7 +7,7 @@ hour=$(date +"%H")
     if [ "$hour" = "01" ] || [ "$hour" = "13" ]; then
         hourZh='一'
     elif [ "$hour" = "02" ] || [ "$hour" = "14" ]; then
-        hourZh='二'
+        hourZh='两'
     elif [ "$hour" = "03" ] || [ "$hour" = "15" ]; then
         hourZh='三'
     elif [ "$hour" = "04" ] || [ "$hour" = "16" ]; then
