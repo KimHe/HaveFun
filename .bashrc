@@ -13,7 +13,6 @@ export NO_AT_BRIDGE=1
 
 # Add calendar and the cowsay for fun
 cal
-
 fortune | cowsay
 
 HaveFun
@@ -22,6 +21,9 @@ HaveFun
 if [ -f /usr/local/lib/python3.4/dist-packages/powerline/bindings/bash/powerline.sh ]; then
     source /usr/local/lib/python3.4/dist-packages/powerline/bindings/bash/powerline.sh
 fi
+
+# Date and time Bash history
+export HISTTIMEFORMAT="%m/%d - %H:%M:%S: "
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
