@@ -67,9 +67,9 @@ if [ -n "$force_color_prompt" ]; then
 	# We have color support; assume it's compliant with Ecma-48
 	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
 	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+	    color_prompt=yes
     else
-	color_prompt=
+	    color_prompt=no
     fi
 fi
 
@@ -101,17 +101,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
-alias ll='ls -alhF'
-alias la='ls -A'
-alias l='ls -CF'
-alias lh='ls -lht'
-alias ld='ls -dhl .*'
-alias rm='rm -i'
-
-# alias for mplayer
-alias mplayer='mplayer -msgcolor -quiet -shuffle'
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -135,3 +124,23 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+#==============================================================================
+#                            user customization
+#==============================================================================
+
+# some more ls aliases
+#alias la='ls -A'
+#alias l='ls -CF'
+alias ll='ls -lhX'
+alias ld='ls -dhl .*'
+alias la='ls -alhF'
+
+# confirm before permanent remove
+alias rm='rm -i'
+
+# alias for mplayer
+alias mplayer='mplayer -msgcolor -quiet -shuffle'
+
+# alias for pdf viewer with vim-like behaviour
+alias vimpdf='apvlv'
