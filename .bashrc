@@ -8,23 +8,6 @@ case $- in
       *) return;;
 esac
 
-# Add to avoid a error in the gnuplot
-export NO_AT_BRIDGE=1
-
-# Add calendar and the cowsay for fun
-cal
-fortune | cowsay
-
-HaveFun
-
-# Powerline statusline
-if [ -f /usr/local/lib/python3.4/dist-packages/powerline/bindings/bash/powerline.sh ]; then
-    source /usr/local/lib/python3.4/dist-packages/powerline/bindings/bash/powerline.sh
-fi
-
-# Date and time Bash history
-export HISTTIMEFORMAT="%m/%d - %H:%M:%S: "
-
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -129,6 +112,19 @@ fi
 #                            user customization
 #==============================================================================
 
+# Add calendar and the cowsay for fun
+        cal
+fortune | cowsay
+
+HaveFun
+
+# Date and time Bash history
+export HISTTIMEFORMAT="%m/%d - %H:%M:%S: "
+
+# Add to avoid a error in the gnuplot
+export NO_AT_BRIDGE=1
+
+
 # some more ls aliases
 #alias la='ls -A'
 #alias l='ls -CF'
@@ -144,3 +140,9 @@ alias mplayer='mplayer -msgcolor -quiet -shuffle'
 
 # alias for pdf viewer with vim-like behaviour
 alias vimpdf='apvlv'
+
+# Powerline statusline
+if [ -f /usr/local/lib/python3.4/dist-packages/powerline/bindings/bash/powerline.sh ]; then
+    source /usr/local/lib/python3.4/dist-packages/powerline/bindings/bash/powerline.sh
+fi
+
