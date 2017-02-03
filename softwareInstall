@@ -42,7 +42,17 @@ sudo apt-get -y install \
     openssh-client openssh-server mc synaptic nfs-common bikeshed \
     liblapack3 liblapack-dev libblas3 libhdf5-dev synapse zsh \
     cowsay fortune cpufrequtils curl dropbox build-essential python3-pip \
-    google-chrome-stable virtualbox virtualbox-guest-additions-iso ubuntu-restricted-extras
+    google-chrome-stable virtualbox virtualbox-guest-additions-iso ubuntu-restricted-extras \
+    libncurses5-dev
+
+
+# Progress viewer
+git clone https://github.com/Xfennec/progress.git
+
+cd progress
+make
+sudo make install
+cd .. && rm -rf progress
 
 
 # youtube-dl
