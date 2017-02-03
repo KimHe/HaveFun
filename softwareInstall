@@ -131,7 +131,7 @@ sudo add-apt-repository --remove ppa:ubuntu-mate-dev/trusty-mate
 
 
 # Chinese font installation
-sudo ln -s /usr/share/texlive/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-winfonts.def 09-texlive.conf
+sudo ln -s /usr/share/texlive/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-winfonts.def /etc/fonts/conf.d/09-texlive.conf
 
 cd /usr/share/fonts
 sudo mkdir winfonts && cd winfonts
