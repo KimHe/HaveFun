@@ -137,15 +137,12 @@ cd /usr/share/fonts
 sudo mkdir winfonts && cd winfonts
 sudo mv ~/Downloads/*.ttf .
 sudo chmod 644 *
-sudo chown root:root
+sudo chown root:root *.ttf
 sudo mkfontscale
 sudo mkfontdir
 sudo fc-cache -fsv
 
-cd ~
-sudo sed 's/%\setCJKfamilyfont/\setCJKfamilyfont/g'
-sudo set 's/%\newcommand/\newcommand/g'
-
+cd /usr/share/texlive/texmf-dist/tex/latex/ctex/fontset/
 
 sed 's|\%\\setCJK|\\setCJK|g' ctex-xecjk-winfonts.def | sudo tee ctex-xecjk-winfonts.def
 sed 's|\%\\newcommand|\\newcommand|g' ctex-xecjk-winfonts.def | sudo tee ctex-xecjk-winfonts.def
