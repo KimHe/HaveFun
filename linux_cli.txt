@@ -1,0 +1,73 @@
+1. batch rename
+    rename -v 's/\.pdf$/\.doc/' *.pdf
+
+2. dictionary
+    look "expression"
+
+3. google cli
+    googler "expression"
+        -o: open in the browser
+        -g: search for keywords in page
+        -number: jump to item number
+
+4. multiple copy
+    echo dir1 dir2 dir3 | xargs -n 1 cp -v file
+
+5. locate files
+    find 'PATH' -name "expression"
+
+6. iso mount
+    sudo mount -o loop *.iso /mnt/
+
+7. vim
+    vim -o file1 file2 (horizontal)
+    vim -O file1 file2 (vertical)
+    vim file +6 (locate to line 6)
+
+    # switch between tabs
+    crtl + w + w
+
+    # spell check & dictionary
+    :setlocal spell spelllang-en_us
+        zg : add to the dictionary
+        z= : find suggestions
+
+    # add & delete commments
+    :30,40s/^/#/
+    :30,40/^#//
+
+    # repeated characters
+    Esc 70i # Esc Esc
+
+    # remove trailing spaces \s: white space \+$: to the end
+    :s/\s\+$//g
+
+    # indent
+    gg=G
+
+8. file encryption
+    openssl aes-256-cbc -a -salt -in .. -out ..
+    openssl aes-256-cbc -d -a -in .. -out ..
+
+9. delete old kernels
+    sudo purge-old-kernels --keep 3
+
+10. check installed package
+    dpkg --get-selections | grep -v deinstall
+
+11. tar check & append
+    tar -tvf *.tar.gz
+    tar -rvf *.tar.gz *.txt
+
+12. top
+    top -o +%MEM (list by memory)
+    top -o +%CPU (list by cpu)
+    top -u user (lisy by user)
+
+13. screenshot
+    scrot -s
+
+14. text to pdf
+    enscript -p file.ps file.txt
+    ps2pdf file.ps file.pdf
+

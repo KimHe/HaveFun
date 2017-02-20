@@ -50,7 +50,7 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 set background=light
-colorscheme desert 
+colorscheme desert
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
@@ -64,8 +64,8 @@ if has("autocmd")
   augroup vimrcEx
   au!
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+  " For all text files set 'textwidth' to 80 characters.
+  autocmd FileType text setlocal textwidth=80
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
@@ -118,4 +118,18 @@ set laststatus=2
 " Use 256 colors
 set t_Co=256
 
+let g:languagetool_jar='/opt/languagetool-3.6/languagetool-commandline.jar'
+
+" Save and load file in vim without login in as root
+command W :execute ':w !sudo tee % > /dev/null' | :edit!
+
+" NERDTree on launch
+"autocmd VimEnter * NERDTree
+"autocmd VimEnter * wincmd p
+
+" Removes the trailing spaces
+"autocmd FileType c,cpp,java,php,m,tex,gp autocmd BufWritePre %s/\s\+$//g
+
+" Vim-LaTex: leave the cursor where it was after compiling
+let g:Tex_GotoError=0
 

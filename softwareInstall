@@ -11,7 +11,7 @@ sudo apt-get autoremove --purge \
     appmenu-gtk appmenu-gtk3 appmenu-qt\* overlay-scrollbar\* activity-log-manager-control-center \
     firefox-globalmenu firefox thunderbird-globalmenu thunderbird rhythmbox libufe-xidgetter0 \
     xul-ext-unity xul-ext-webaccounts webaccounts-extension-common xul-ext-websites-integration \
-    gnome-control-center gnome-session software-center \
+    gnome-control-center gnome-session software-center enscript \
     libzeitgeist-1.0-1 python-zeitgeist zeitgeist-core 
 
 sudo apt-get autoremove -y
